@@ -43,19 +43,14 @@
       <video id="intro-video" class="intro-video" autoplay playsinline muted preload="auto">
         <source src="reception-intro.mp4" type="video/mp4">
       </video>
+      <div class="intro-tap-shield" id="intro-tap-shield" title="Click or tap to enter"></div>
     </div>
     
     <!-- Skip Intro Button Positioned at Bottom-Left -->
-    <button class="skip-intro-btn" id="btn-skip-intro" aria-label="Skip Intro">
+    <button class="skip-intro-btn" id="btn-skip-intro" aria-label="Skip Intro and Enter Invitation">
       <i class="fa-solid fa-forward-step"></i>
       <span>Skip Intro</span>
     </button>
-
-    <!-- Subtle Scroll Hint -->
-    <div class="intro-scroll-hint" id="intro-scroll-hint">
-      <span>Scroll to Enter</span>
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
   </div>
 
   <!-- Ambient Blurred Background (provides cinematic glow) -->
@@ -171,10 +166,10 @@
                 <source src="ordered_video.mp4" type="video/mp4">
               </video>
 
-              <!-- Discreet Sound Toggle Pill -->
-              <button class="video-sound-pill" id="btn-ordered-mute" title="Toggle Sound">
-                <i class="fa-solid fa-volume-xmark" id="icon-ordered-mute"></i>
-                <span id="text-ordered-mute">Muted</span>
+              <!-- Sound Toggle Pill -->
+              <button class="video-sound-pill" id="btn-ordered-mute" aria-label="Toggle Video Sound">
+                <i class="fa-solid fa-volume-xmark"></i>
+                <span class="btn-text">Muted</span>
               </button>
 
               <!-- Bottom Cue to Page 3 -->
@@ -290,7 +285,10 @@
                   <div class="sec4-icon-glyph">
                     <i class="fa-regular fa-clock"></i>
                   </div>
-                  <div class="sec4-text-val">6:00 PM – 10:00 PM</div>
+                  <div class="sec4-text-val sec4-time-lines">
+                    <span>6:00 PM –</span>
+                    <span>10:00 PM</span>
+                  </div>
                 </div>
               </div>
             </div>

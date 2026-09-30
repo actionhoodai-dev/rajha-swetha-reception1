@@ -160,18 +160,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnOrderedPlay) btnOrderedPlay.addEventListener('click', toggleOrderedVideoPlay);
   if (centerVideoTap) centerVideoTap.addEventListener('click', toggleOrderedVideoPlay);
 
+  if (orderedVideo) {
+    orderedVideo.muted = true;
+  }
+
   if (btnOrderedMute && orderedVideo) {
     btnOrderedMute.addEventListener('click', (e) => {
       e.stopPropagation();
       orderedVideo.muted = !orderedVideo.muted;
+      const icon = btnOrderedMute.querySelector('i');
+      const text = btnOrderedMute.querySelector('.btn-text') || btnOrderedMute.querySelector('span');
       if (orderedVideo.muted) {
-        iconOrderedMute.className = 'fa-solid fa-volume-xmark';
-        textOrderedMute.textContent = 'Muted';
-        showToast('Video sound muted');
+        if (icon) icon.className = 'fa-solid fa-volume-xmark';
+        if (text) text.textContent = 'Muted';
+        showToast('Video Muted');
       } else {
-        iconOrderedMute.className = 'fa-solid fa-volume-high';
-        textOrderedMute.textContent = 'Sound';
-        showToast('Video sound enabled');
+        if (icon) icon.className = 'fa-solid fa-volume-high';
+        if (text) text.textContent = 'Sound On';
+        showToast('Video Sound Active');
       }
     });
   }
@@ -192,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const introOverlay = document.getElementById('intro-overlay');
   const introVideo = document.getElementById('intro-video');
   const btnSkipIntro = document.getElementById('btn-skip-intro');
-  const introScrollHint = document.getElementById('intro-scroll-hint');
+  const introTapShield = document.getElementById('intro-tap-shield');
 
   let isIntroDismissed = false;
 
@@ -204,8 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
       introOverlay.classList.add('dismissed');
       setTimeout(() => {
         introOverlay.style.display = 'none';
-        if (introVideo) introVideo.pause();
-      }, 850);
+        if (introVideo) {
+          try { introVideo.pause(); } catch (e) {}
+        }
+      }, 750);
     }
 
     // Play reception music upon entering
@@ -213,6 +221,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (introVideo) {
+    // 1. timeupdate: checks if within 0.35s of video end
+    introVideo.addEventListener('timeupdate', () => {
+      if (introVideo.duration && !isNaN(introVideo.duration) && introVideo.currentTime >= introVideo.duration - 0.35) {
+        dismissIntro();
+      }
+    });
+
+    // 2. ended event
+    introVideo.addEventListener('ended', dismissIntro);
+
+    // 3. pause event: in case video stops on last frame without firing ended
+    introVideo.addEventListener('pause', () => {
+      if (introVideo.duration && !isNaN(introVideo.duration) && introVideo.currentTime >= introVideo.duration - 0.6) {
+        dismissIntro();
+      }
+    });
+
+    // 4. loadedmetadata: calculate total duration and set watchdog
+    const setupDurationWatchdog = () => {
+      if (introVideo.duration && !isNaN(introVideo.duration) && introVideo.duration > 0) {
+        setTimeout(dismissIntro, (introVideo.duration + 0.3) * 1000);
+      }
+    };
+
+    introVideo.addEventListener('loadedmetadata', setupDurationWatchdog);
+    if (introVideo.readyState >= 1) setupDurationWatchdog();
+
+    // 5. Absolute safety watchdog (12s maximum)
+    setTimeout(dismissIntro, 12000);
+
     introVideo.play().catch(() => {
       const startIntroVideo = () => {
         if (introVideo) introVideo.play().catch(() => {});
@@ -222,8 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('touchstart', startIntroVideo, { once: true });
       window.addEventListener('click', startIntroVideo, { once: true });
     });
-
-    introVideo.addEventListener('ended', dismissIntro);
   }
 
   if (btnSkipIntro) {
@@ -231,10 +267,19 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       dismissIntro();
     });
+    btnSkipIntro.addEventListener('touchend', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      dismissIntro();
+    });
   }
 
-  if (introScrollHint) {
-    introScrollHint.addEventListener('click', dismissIntro);
+  if (introTapShield) {
+    introTapShield.addEventListener('click', dismissIntro);
+    introTapShield.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      dismissIntro();
+    });
   }
 
   // Dismiss intro on button click or when video finishes naturally

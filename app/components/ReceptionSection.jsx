@@ -19,15 +19,15 @@ export default function ReceptionSection({ onScrollTop }) {
             decoding="async"
           />
 
-          {/* Seamless inline details - moved slightly down, star divider removed */}
+          {/* Seamless inline details */}
           <div className="sec4-inline-details-box">
             <div className="sec4-inline-row">
-              {/* Date Column - shifted slightly to right */}
+              {/* Date Column */}
               <div className="sec4-col sec4-date-col">
                 <div className="sec4-icon-glyph">
                   <i className="fa-regular fa-calendar"></i>
                 </div>
-                <div className="sec4-text-val">12 NOV 2026</div>
+                <div className="sec4-text-val sec4-date-single">12 NOV 2026</div>
               </div>
 
               {/* Vertical Divider */}
@@ -53,7 +53,10 @@ export default function ReceptionSection({ onScrollTop }) {
                 <div className="sec4-icon-glyph">
                   <i className="fa-regular fa-clock"></i>
                 </div>
-                <div className="sec4-text-val">6:00 PM – 10:00 PM</div>
+                <div className="sec4-text-val sec4-time-lines">
+                  <span>6:00 PM –</span>
+                  <span>10:00 PM</span>
+                </div>
               </div>
             </div>
           </div>

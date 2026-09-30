@@ -1,22 +1,25 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
-export default function VideoSection({ onScrollNext, showToast }) {
+export default function VideoSection({ onScrollNext }) {
   const videoRef = useRef(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
 
-  // Ensure video always continuously plays without ever feeling static
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
+    video.muted = true;
+
     const startPlaying = () => {
       video.muted = true;
       video.play().catch(() => {
-        // Retry on first touch/interaction if browser was pending
         const handleUserGesture = () => {
-          if (video) video.play().catch(() => {});
+          if (video) {
+            video.muted = true;
+            video.play().catch(() => {});
+          }
           window.removeEventListener('touchstart', handleUserGesture);
           window.removeEventListener('click', handleUserGesture);
         };
@@ -28,16 +31,22 @@ export default function VideoSection({ onScrollNext, showToast }) {
     startPlaying();
   }, []);
 
-  const toggleSound = (e) => {
-    e.stopPropagation();
+  const toggleSound = () => {
     const video = videoRef.current;
     if (!video) return;
+    const nextMuted = !video.muted;
+    video.muted = nextMuted;
+    setIsVideoMuted(nextMuted);
 
-    video.muted = !video.muted;
-    setIsMuted(video.muted);
-    if (showToast) {
-      showToast(video.muted ? 'Video Muted 🔇' : 'Video Sound Active 🔊');
-    }
+    // Show temporary toast notification
+    const toast = document.createElement('div');
+    toast.className = 'site-toast show';
+    toast.textContent = nextMuted ? 'Video Muted' : 'Video Sound Active';
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 400);
+    }, 2200);
   };
 
   return (
@@ -50,7 +59,7 @@ export default function VideoSection({ onScrollNext, showToast }) {
               className="continuous-running-video"
               autoPlay
               loop
-              muted={isMuted}
+              muted
               playsInline
               preload="auto"
             >
@@ -59,17 +68,17 @@ export default function VideoSection({ onScrollNext, showToast }) {
               Your browser does not support the video tag.
             </video>
 
-            {/* Discreet Sound Toggle Pill */}
-            <button 
-              className="video-sound-pill" 
+            {/* Video Sound Pill */}
+            <button
+              className="video-sound-pill"
               onClick={toggleSound}
-              title="Toggle Video Audio"
+              aria-label={isVideoMuted ? "Unmute video sound" : "Mute video sound"}
             >
-              <i className={`fa-solid ${isMuted ? 'fa-volume-xmark' : 'fa-volume-high'}`}></i>
-              <span>{isMuted ? 'Muted' : 'Sound On'}</span>
+              <i className={isVideoMuted ? "fa-solid fa-volume-xmark" : "fa-solid fa-volume-high"}></i>
+              <span>{isVideoMuted ? "Muted" : "Sound On"}</span>
             </button>
 
-            {/* Seamless Bottom Cue to Page 4 (Our Story) */}
+            {/* Seamless Bottom Cue to Our Story */}
             <div className="video-next-cue" onClick={() => onScrollNext(2)}>
               <span>Our Story</span>
               <i className="fa-solid fa-chevron-down"></i>
