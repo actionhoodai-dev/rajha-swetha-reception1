@@ -7,14 +7,22 @@ export const viewport = {
   userScalable: false,
 };
 
+// Automatically use VERCEL_URL if deployed on Vercel, or custom domain fallback
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? process.env.NEXT_PUBLIC_SITE_URL
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'https://rajha-swetha-reception1.vercel.app';
+
 export const metadata = {
-  metadataBase: new URL('https://rajha-swetha-reception.vercel.app'),
+  metadataBase: new URL(siteUrl),
   title: 'Rajha Mukilan & Swetha | Wedding & Reception Invitation',
   description: 'Two beautiful souls, one incredible journey. You are cordially invited to celebrate the wedding reception of Rajha Mukilan and Swetha on 12 November 2026 at Bharathi Mahal, Gobichettipalayam.',
   openGraph: {
     title: 'Rajha Mukilan & Swetha | Wedding & Reception',
     description: 'Two beautiful souls, one incredible journey. Save the date: 12 November 2026 at Bharathi Mahal, Gobichettipalayam.',
     type: 'website',
+    url: '/',
     images: [
       {
         url: '/og-image.jpg',
