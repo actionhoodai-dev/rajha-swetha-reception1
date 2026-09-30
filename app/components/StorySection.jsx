@@ -10,9 +10,9 @@ export default function StorySection({ onScrollNext }) {
           className="mobile-card card-ratio-story"
           style={{ backgroundImage: `url('${STORY_BLUR_BASE64}')` }}
         >
-          {/* Instant High-Priority Background Image */}
+          {/* High-Resolution Background Image with Couple Film Strip Photos */}
           <img
-            src="/template_story_blank.webp"
+            src="/final-page3.png"
             alt="Our Story Background"
             className="mobile-card-bg-img"
             loading="lazy"

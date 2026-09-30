@@ -1,9 +1,9 @@
 'use client';
 
 const BACKGROUND_MAP = [
-  '/template_intro_blank.jpg',
+  '/final-page1.png',
   '/section2_hd.png',
-  '/template_story_blank.jpg',
+  '/final-page3.png',
   '/template_reception_blank.jpg',
 ];
 

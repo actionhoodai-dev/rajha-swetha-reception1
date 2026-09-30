@@ -50,7 +50,7 @@ html, body {
 .ambient-backdrop {
   position: fixed;
   inset: 0;
-  background-image: url('template_intro_blank.jpg');
+  background-image: url('final-page1.png');
   background-size: cover;
   background-position: center;
   filter: blur(50px) brightness(0.28) saturate(1.4);

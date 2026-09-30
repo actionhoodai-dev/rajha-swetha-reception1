@@ -10,9 +10,9 @@ export default function HeroSection({ onScrollNext }) {
           className="mobile-card card-ratio-intro"
           style={{ backgroundImage: `url('${INTRO_BLUR_BASE64}')` }}
         >
-          {/* Instant High-Priority Background Image */}
+          {/* High-Resolution Background Image with Couple Photos */}
           <img
-            src="/template_intro_blank.webp"
+            src="/final-page1.png"
             alt="Rajha Mukilan & Swetha Wedding"
             className="mobile-card-bg-img"
             fetchPriority="high"

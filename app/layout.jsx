@@ -8,12 +8,28 @@ export const viewport = {
 };
 
 export const metadata = {
+  metadataBase: new URL('https://rajha-swetha-reception.vercel.app'),
   title: 'Rajha Mukilan & Swetha | Wedding & Reception Invitation',
-  description: 'You are cordially invited to celebrate the wedding reception of Rajha Mukilan and Swetha on 12 November 2026 at Bharathi Mahal, Gobichettipalayam.',
+  description: 'Two beautiful souls, one incredible journey. You are cordially invited to celebrate the wedding reception of Rajha Mukilan and Swetha on 12 November 2026 at Bharathi Mahal, Gobichettipalayam.',
   openGraph: {
     title: 'Rajha Mukilan & Swetha | Wedding & Reception',
-    description: 'Two beautiful souls, one incredible journey. Save the date: 12 November 2026.',
+    description: 'Two beautiful souls, one incredible journey. Save the date: 12 November 2026 at Bharathi Mahal, Gobichettipalayam.',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 675,
+        type: 'image/jpeg',
+        alt: 'Rajha Mukilan & Swetha Wedding & Reception Invitation',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rajha Mukilan & Swetha | Wedding & Reception',
+    description: 'Two beautiful souls, one incredible journey. Save the date: 12 November 2026.',
+    images: ['/og-image.jpg'],
   },
 };
 
@@ -21,19 +37,28 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* High-Priority Image Preloads for Instant First Paint */}
+        {/* Open Graph Meta Tags specifically for WhatsApp, iMessage, and Social Previews */}
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:image:secure_url" content="/og-image.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="675" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="/og-image.jpg" />
+
+        {/* High-Priority Preloads for Instant First Paint */}
         <link
           rel="preload"
           as="image"
-          href="/template_intro_blank.webp"
-          type="image/webp"
+          href="/final-page1.png"
+          type="image/png"
           fetchPriority="high"
         />
         <link
           rel="preload"
           as="image"
-          href="/template_story_blank.webp"
-          type="image/webp"
+          href="/final-page3.png"
+          type="image/png"
         />
         <link
           rel="preload"
@@ -44,7 +69,13 @@ export default function RootLayout({ children }) {
         <link
           rel="preload"
           as="video"
-          href="/ordered_video.mp4"
+          href="/reception-intro.mp4"
+          type="video/mp4"
+        />
+        <link
+          rel="preload"
+          as="video"
+          href="/3rd-page-video.mp4"
           type="video/mp4"
         />
 
