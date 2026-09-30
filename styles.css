@@ -661,7 +661,7 @@ html, body {
 
 .sec4-date-col {
   flex: 1.1;
-  margin-left: 10px; /* Moved slightly to its right */
+  margin-left: 1cm; /* Moved to right by 1 cm away from left pillar */
 }
 
 .sec4-venue-col {
