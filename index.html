@@ -15,6 +15,7 @@
   <link rel="preload" as="image" href="template_story_blank.webp" type="image/webp">
   <link rel="preload" as="image" href="template_reception_blank.webp" type="image/webp">
   <link rel="preload" as="video" href="ordered_video.mp4" type="video/mp4">
+  <link rel="preload" as="audio" href="reception_song.mp3" type="audio/mpeg">
 
   <!-- Google Fonts for Identical Typography matching sample images -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,16 +46,6 @@
         <i class="fa-solid fa-heart" style="color: #E8A598;"></i>
         <span class="btn-text">Rajha & Swetha</span>
       </span>
-    </div>
-
-    <div class="header-right">
-      <button class="header-btn audio-btn" id="btn-music-toggle" title="Toggle Romantic Ambience Music">
-        <div class="sound-wave-icon" id="sound-wave">
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <i class="fa-solid fa-music"></i>
-        <span class="btn-text" id="music-text">Music</span>
-      </button>
     </div>
   </header>
 
@@ -177,18 +168,43 @@
               <h2 class="sec3-story-script">Our Story</h2>
               <div class="sec3-lotus-divider">
                 <span class="sec3-divider-line"></span>
-                <svg class="lotus-svg-icon" viewBox="0 0 24 24" width="16" height="16">
+                <svg class="lotus-svg-icon" viewBox="0 0 24 24" width="14" height="14">
                   <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
                 </svg>
                 <span class="sec3-divider-line"></span>
               </div>
               <div class="sec3-story-prose">
-                <p class="story-para">Some stories begin unexpectedly, but the most beautiful ones begin with a simple hello.</p>
-                <p class="story-para">Our journey began with friendship, where two hearts slowly found their way to each other.</p>
-                <p class="story-para">Through countless moments, conversations, laughter, and memories, our bond grew stronger with every passing day.</p>
-                <p class="story-para">What started as a beautiful friendship blossomed into a love we chose to cherish forever.</p>
-                <p class="story-para">From friends to soulmates, from soulmates to lovers, and now to husband and wife, our journey has been nothing short of magical.</p>
-                <p class="story-para story-para-conclusion">And now, we begin our next chapter — together, for a lifetime. 💍✨</p>
+                <p class="story-para">
+                  Some stories begin unexpectedly,<br />
+                  but the most beautiful ones<br />
+                  begin with a simple hello.
+                </p>
+                <p class="story-para">
+                  Our journey began with friendship,<br />
+                  where two hearts slowly<br />
+                  found their way to each other.
+                </p>
+                <p class="story-para">
+                  Through countless moments, conversations,<br />
+                  laughter, and shared memories,<br />
+                  our bond grew stronger<br />
+                  with every passing day.
+                </p>
+                <p class="story-para">
+                  What started as friendship<br />
+                  blossomed into a love<br />
+                  we chose to cherish forever.
+                </p>
+                <p class="story-para">
+                  From friends to soulmates,<br />
+                  from soulmates to lovers,<br />
+                  and now husband and wife,<br />
+                  our journey has been magical.
+                </p>
+                <p class="story-para story-para-conclusion">
+                  And now, we begin our next<br />
+                  chapter — together, for a lifetime. 💍
+                </p>
               </div>
             </div>
 
@@ -247,15 +263,6 @@
                   <div class="sec4-text-val">6:00 PM – 10:00 PM</div>
                 </div>
               </div>
-
-              <!-- Lotus Flourish Line -->
-              <div class="sec4-lotus-row">
-                <span class="sec4-lotus-line"></span>
-                <svg class="lotus-svg-icon" viewBox="0 0 24 24">
-                  <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
-                </svg>
-                <span class="sec4-lotus-line"></span>
-              </div>
             </div>
 
             <!-- Back to Top Cue -->
@@ -272,6 +279,18 @@
 
     </div>
   </main>
+
+  <!-- Audio Element with reception_song.mp3 -->
+  <audio id="reception-audio" src="reception_song.mp3" loop preload="auto"></audio>
+
+  <!-- Floating Mute/Play Button at the Right Bottom of the Screen -->
+  <button class="floating-bottom-audio-btn" id="btn-bottom-audio" title="Toggle Reception Music">
+    <div class="bottom-sound-wave" id="bottom-sound-wave" style="display: none;">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <i class="fa-solid fa-volume-xmark" id="bottom-audio-icon"></i>
+    <span id="bottom-audio-label">Muted</span>
+  </button>
 
   <!-- Toast Notification Message -->
   <div class="toast-notification" id="toast-notification"></div>

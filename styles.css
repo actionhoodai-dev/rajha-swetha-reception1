@@ -565,9 +565,10 @@ html, body {
 .sec3-story-box {
   position: absolute;
   top: 15.5%;
-  left: 17%;
-  right: 17%;
-  max-width: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82%;
+  max-width: 235px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -580,7 +581,7 @@ html, body {
 /* Gold Script Calligraphy Heading (Appears only ONCE) */
 .sec3-story-script {
   font-family: 'Great Vibes', 'Alex Brush', cursive;
-  font-size: clamp(2rem, 6.8vw, 2.7rem);
+  font-size: clamp(1.9rem, 6.5vw, 2.5rem);
   color: #C8973E;
   line-height: 1.05;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.75);
@@ -592,8 +593,8 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 48%;
-  margin: 2px auto 6px auto;
+  width: 45%;
+  margin: 2px auto 5px auto;
 }
 
 .sec3-divider-line {
@@ -605,29 +606,32 @@ html, body {
 .sec3-story-prose {
   display: flex;
   flex-direction: column;
-  gap: clamp(4px, 1vh, 7px);
+  gap: clamp(3px, 0.8vh, 6px);
   width: 100%;
+  max-width: 230px;
+  margin: 0 auto;
 }
 
 .story-para {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-size: clamp(0.68rem, 2.15vw, 0.78rem);
-  line-height: 1.4;
+  font-size: clamp(0.65rem, 2.0vw, 0.76rem);
+  line-height: 1.36;
   color: #342315;
   font-weight: 600;
   text-align: center;
   margin: 0;
+  word-break: normal;
 }
 
 .story-para-conclusion {
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 /* ================= PAGE 4: RECEPTION INLINE ================= */
 .sec4-inline-details-box {
   position: absolute;
-  top: 36.5%;
+  top: 38.8%; /* Moved down slightly */
   left: 6%;
   right: 6%;
   display: flex;
@@ -657,6 +661,7 @@ html, body {
 
 .sec4-date-col {
   flex: 1.1;
+  margin-left: 10px; /* Moved slightly to its right */
 }
 
 .sec4-venue-col {
@@ -693,24 +698,61 @@ html, body {
 
 .sec4-inline-divider {
   width: 1px;
-  height: clamp(30px, 4.5vh, 38px);
+  height: clamp(28px, 4.2vh, 36px);
   background: rgba(54, 46, 38, 0.4);
 }
 
-.sec4-lotus-row {
-  display: flex;
+/* Floating Mute/Play Button at the Right Bottom of the Screen */
+.floating-bottom-audio-btn {
+  position: fixed;
+  bottom: 22px;
+  right: 18px;
+  z-index: 120;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 52%;
-  margin: clamp(5px, 1.2vh, 8px) auto 0 auto;
+  gap: 7px;
+  padding: 8px 14px;
+  background: rgba(20, 15, 12, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 30px;
+  color: var(--gold-light);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(212, 175, 55, 0.3);
+  transition: var(--trans-smooth);
 }
 
-.sec4-lotus-line {
-  height: 1px;
-  flex: 1;
-  background: linear-gradient(to right, transparent, rgba(54, 46, 38, 0.5), transparent);
+.floating-bottom-audio-btn:hover {
+  background: rgba(35, 26, 20, 0.95);
+  border-color: var(--gold-primary);
+  color: #FFF;
+  transform: scale(1.05);
 }
+
+.bottom-sound-wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 12px;
+}
+
+.bottom-sound-wave span {
+  display: block;
+  width: 2px;
+  height: 100%;
+  background: var(--gold-light);
+  border-radius: 2px;
+  animation: wave 1s infinite ease-in-out;
+}
+
+.bottom-sound-wave span:nth-child(1) { animation-delay: 0.1s; }
+.bottom-sound-wave span:nth-child(2) { animation-delay: 0.3s; }
+.bottom-sound-wave span:nth-child(3) { animation-delay: 0.2s; }
+.bottom-sound-wave span:nth-child(4) { animation-delay: 0.4s; }
 
 /* Toast */
 .toast-notification {

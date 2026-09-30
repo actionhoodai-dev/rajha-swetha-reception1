@@ -188,85 +188,78 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // ================= 4. ROMANTIC MUSIC SYNTHESIZER =================
-  const btnMusicToggle = document.getElementById('btn-music-toggle');
-  let audioCtx = null;
-  let isMusicPlaying = false;
-  let melodyInterval = null;
+  // ================= 4. RECEPTION SONG AUDIO PLAYER =================
+  const receptionAudio = document.getElementById('reception-audio');
+  const btnBottomAudio = document.getElementById('btn-bottom-audio');
+  const bottomSoundWave = document.getElementById('bottom-sound-wave');
+  const bottomAudioIcon = document.getElementById('bottom-audio-icon');
+  const bottomAudioLabel = document.getElementById('bottom-audio-label');
 
-  const notes = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33, 659.25, 739.99];
+  let isSongPlaying = false;
 
-  function playChime(freq, time, duration = 2.0) {
-    if (!audioCtx) return;
-    try {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, time);
-
-      gain.gain.setValueAtTime(0.001, time);
-      gain.gain.exponentialRampToValueAtTime(0.08, time + 0.1);
-      gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start(time);
-      osc.stop(time + duration);
-    } catch (e) {
-      console.warn('Audio play error:', e);
+  function updateAudioUI(playing) {
+    isSongPlaying = playing;
+    if (bottomSoundWave) bottomSoundWave.style.display = playing ? 'flex' : 'none';
+    if (bottomAudioIcon) {
+      bottomAudioIcon.style.display = playing ? 'none' : 'inline-block';
+      bottomAudioIcon.className = playing ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
     }
+    if (bottomAudioLabel) bottomAudioLabel.textContent = playing ? 'Music' : 'Muted';
+    if (btnBottomAudio) btnBottomAudio.classList.toggle('playing', playing);
   }
 
-  function startMelody() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-
-    let step = 0;
-    const sequence = [
-      [0, 2, 4], [3, 5], [2, 4, 6], [1, 3],
-      [4, 6, 7], [3, 5], [2, 4], [0, 4, 5]
-    ];
-
-    melodyInterval = setInterval(() => {
-      const chord = sequence[step % sequence.length];
-      chord.forEach((noteIdx, offset) => {
-        playChime(notes[noteIdx % notes.length], audioCtx.currentTime + offset * 0.28, 2.4);
-      });
-      step++;
-    }, 1400);
-
-    isMusicPlaying = true;
-    btnMusicToggle.classList.add('playing');
-    document.getElementById('music-text').textContent = 'Mute';
-    showToast('Playing Romantic Ambience 🎵');
+  function playSong() {
+    if (!receptionAudio) return;
+    receptionAudio.play().then(() => {
+      updateAudioUI(true);
+    }).catch(() => {
+      // Browser autoplay policy requires user gesture
+    });
   }
 
-  function stopMelody() {
-    if (melodyInterval) {
-      clearInterval(melodyInterval);
-      melodyInterval = null;
-    }
-    isMusicPlaying = false;
-    btnMusicToggle.classList.remove('playing');
-    document.getElementById('music-text').textContent = 'Music';
-    showToast('Ambience Muted');
+  function pauseSong() {
+    if (!receptionAudio) return;
+    receptionAudio.pause();
+    updateAudioUI(false);
   }
 
-  if (btnMusicToggle) {
-    btnMusicToggle.addEventListener('click', () => {
-      if (isMusicPlaying) {
-        stopMelody();
+  // Auto-play on mount or on first user scroll / touch / click
+  if (receptionAudio) {
+    receptionAudio.volume = 0.75;
+    playSong();
+
+    const handleFirstUserInteraction = () => {
+      if (receptionAudio && receptionAudio.paused) {
+        receptionAudio.play().then(() => updateAudioUI(true)).catch(() => {});
+      }
+      window.removeEventListener('scroll', handleFirstUserInteraction);
+      window.removeEventListener('wheel', handleFirstUserInteraction);
+      window.removeEventListener('touchstart', handleFirstUserInteraction);
+      window.removeEventListener('pointerdown', handleFirstUserInteraction);
+      window.removeEventListener('click', handleFirstUserInteraction);
+    };
+
+    window.addEventListener('scroll', handleFirstUserInteraction, { passive: true });
+    window.addEventListener('wheel', handleFirstUserInteraction, { passive: true });
+    window.addEventListener('touchstart', handleFirstUserInteraction, { passive: true });
+    window.addEventListener('pointerdown', handleFirstUserInteraction, { passive: true });
+    window.addEventListener('click', handleFirstUserInteraction, { passive: true });
+  }
+
+  if (btnBottomAudio) {
+    btnBottomAudio.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!receptionAudio) return;
+      if (receptionAudio.paused) {
+        playSong();
+        showToast('Playing Song 🎵');
       } else {
-        startMelody();
+        pauseSong();
+        showToast('Song Muted 🔇');
       }
     });
   }
+
 
 
   // ================= 5. FALLING ROSE PETALS PARTICLE CANVAS =================

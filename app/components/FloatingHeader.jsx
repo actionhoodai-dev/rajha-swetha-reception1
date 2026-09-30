@@ -1,9 +1,6 @@
 'use client';
 
-export default function FloatingHeader({
-  isMusicPlaying,
-  onToggleMusic,
-}) {
+export default function FloatingHeader() {
   return (
     <header className="floating-header">
       <div className="header-left">
@@ -11,23 +8,6 @@ export default function FloatingHeader({
           <i className="fa-solid fa-heart" style={{ color: '#E8A598' }}></i>
           <span className="btn-text">Rajha & Swetha</span>
         </span>
-      </div>
-
-      <div className="header-right">
-        <button
-          className={`header-btn audio-btn ${isMusicPlaying ? 'playing' : ''}`}
-          onClick={onToggleMusic}
-          title="Toggle Romantic Ambience Music"
-        >
-          <div className="sound-wave-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <i className="fa-solid fa-music"></i>
-          <span className="btn-text">{isMusicPlaying ? 'Playing' : 'Music'}</span>
-        </button>
       </div>
     </header>
   );

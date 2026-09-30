@@ -19,10 +19,10 @@ export default function ReceptionSection({ onScrollTop }) {
             decoding="async"
           />
 
-          {/* Seamless inline details matching Sample Image 2 */}
+          {/* Seamless inline details - moved slightly down, star divider removed */}
           <div className="sec4-inline-details-box">
             <div className="sec4-inline-row">
-              {/* Date Column */}
+              {/* Date Column - shifted slightly to right */}
               <div className="sec4-col sec4-date-col">
                 <div className="sec4-icon-glyph">
                   <i className="fa-regular fa-calendar"></i>
@@ -55,15 +55,6 @@ export default function ReceptionSection({ onScrollTop }) {
                 </div>
                 <div className="sec4-text-val">6:00 PM – 10:00 PM</div>
               </div>
-            </div>
-
-            {/* Lotus Flourish Line */}
-            <div className="sec4-lotus-row">
-              <span className="sec4-lotus-line"></span>
-              <svg className="lotus-svg-icon" viewBox="0 0 24 24">
-                <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
-              </svg>
-              <span className="sec4-lotus-line"></span>
             </div>
           </div>
 

@@ -19,7 +19,7 @@ export default function StorySection({ onScrollNext }) {
             decoding="async"
           />
 
-          {/* Exactly allocated story box - text appears only ONCE and fits parchment perfectly */}
+          {/* Strictly 5-6 words per line maximum to prevent any design overlap */}
           <div className="sec3-story-box">
             {/* Gold Script Calligraphy Heading (appears ONLY ONCE) */}
             <h2 className="sec3-story-script">Our Story</h2>
@@ -27,36 +27,49 @@ export default function StorySection({ onScrollNext }) {
             {/* Subtle decorative divider */}
             <div className="sec3-lotus-divider">
               <span className="sec3-divider-line"></span>
-              <svg className="lotus-svg-icon" viewBox="0 0 24 24" width="16" height="16">
+              <svg className="lotus-svg-icon" viewBox="0 0 24 24" width="14" height="14">
                 <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
               </svg>
               <span className="sec3-divider-line"></span>
             </div>
 
-            {/* User's Exact Story Content tailored to fit parchment safe zone */}
+            {/* 5 to 6 words maximum per line */}
             <div className="sec3-story-prose">
               <p className="story-para">
-                Some stories begin unexpectedly, but the most beautiful ones begin with a simple hello.
+                Some stories begin unexpectedly,<br />
+                but the most beautiful ones<br />
+                begin with a simple hello.
               </p>
               
               <p className="story-para">
-                Our journey began with friendship, where two hearts slowly found their way to each other.
+                Our journey began with friendship,<br />
+                where two hearts slowly<br />
+                found their way to each other.
               </p>
               
               <p className="story-para">
-                Through countless moments, conversations, laughter, and memories, our bond grew stronger with every passing day.
+                Through countless moments, conversations,<br />
+                laughter, and shared memories,<br />
+                our bond grew stronger<br />
+                with every passing day.
               </p>
               
               <p className="story-para">
-                What started as a beautiful friendship blossomed into a love we chose to cherish forever.
+                What started as friendship<br />
+                blossomed into a love<br />
+                we chose to cherish forever.
               </p>
 
               <p className="story-para">
-                From friends to soulmates, from soulmates to lovers, and now to husband and wife, our journey has been nothing short of magical.
+                From friends to soulmates,<br />
+                from soulmates to lovers,<br />
+                and now husband and wife,<br />
+                our journey has been magical.
               </p>
               
               <p className="story-para story-para-conclusion">
-                And now, we begin our next chapter — together, for a lifetime. 💍✨
+                And now, we begin our next<br />
+                chapter — together, for a lifetime. 💍
               </p>
             </div>
           </div>
