@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rajha Mukilan & Swetha | Wedding & Reception</title>
+  
+  <meta name="description" content="You are cordially invited to celebrate the wedding reception of Rajha Mukilan and Swetha on 12 November 2026 at Bharathi Mahal, Gobichettipalayam.">
+  <meta property="og:title" content="Rajha Mukilan & Swetha | Wedding Reception">
+  <meta property="og:description" content="Two beautiful souls, one incredible journey. Save the date: 12 November 2026 at Bharathi Mahal, Gobichettipalayam.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts for Identical Typography matching sample images -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Satisfy&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Blurred Background (provides cinematic glow) -->
+  <div class="ambient-backdrop" id="ambient-backdrop"></div>
+
+  <!-- Petals Particle Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Top Progress Bar -->
+  <div class="top-progress-container">
+    <div class="top-progress-bar" id="top-progress-bar"></div>
+  </div>
+
+  <!-- Floating Header Controls -->
+  <header class="floating-header">
+    <div class="header-left">
+      <span class="header-btn" style="cursor: default; opacity: 0.9;">
+        <i class="fa-solid fa-heart" style="color: #E8A598;"></i>
+        <span class="btn-text">Rajha & Swetha</span>
+      </span>
+    </div>
+
+    <div class="header-right">
+      <button class="header-btn" id="btn-petals-toggle" title="Toggle Falling Petals">
+        <i class="fa-solid fa-fan"></i>
+        <span class="btn-text">Petals</span>
+      </button>
+      
+      <button class="header-btn audio-btn" id="btn-music-toggle" title="Toggle Romantic Ambience Music">
+        <div class="sound-wave-icon" id="sound-wave">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <i class="fa-solid fa-music"></i>
+        <span class="btn-text" id="music-text">Music</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Side Navigation Indicator Dots -->
+  <nav class="side-nav" aria-label="Page Sections Navigation">
+    <button class="nav-dot active" data-section="0" title="1. Welcome">
+      <span class="dot-label">1. Welcome</span>
+    </button>
+    <button class="nav-dot" data-section="1" title="2. Invitation Video">
+      <span class="dot-label">2. Invitation Video</span>
+    </button>
+    <button class="nav-dot" data-section="2" title="3. Our Story">
+      <span class="dot-label">3. Our Story</span>
+    </button>
+    <button class="nav-dot" data-section="3" title="4. Reception Details">
+      <span class="dot-label">4. Reception</span>
+    </button>
+  </nav>
+
+  <!-- Main Scrollable Story Container -->
+  <main class="story-wrapper" id="story-wrapper">
+    <div class="story-viewport" id="story-viewport">
+
+      <!-- ================= PAGE 1: HERO / COVER (Matching Sample Image 1) ================= -->
+      <section class="story-page" id="section-1" data-index="0">
+        <div class="mobile-canvas-stage">
+          <div class="mobile-card card-ratio-intro" style="background-image: url('template_intro_blank.jpg');">
+            
+            <div class="sec1-typography-container">
+              <div class="sec1-tagline-top">
+                <span>TWO</span>
+                <span>BEAUTIFUL SOULS</span>
+                <span>ONE INCREDIBLE</span>
+                <span>JOURNEY</span>
+              </div>
+
+              <div class="sec1-lotus-divider">
+                <span class="sec1-divider-line"></span>
+                <svg class="lotus-svg-icon" viewBox="0 0 24 24">
+                  <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
+                </svg>
+                <span class="sec1-divider-line"></span>
+              </div>
+
+              <div class="sec1-names-block">
+                <h1 class="sec1-groom-title">RAJHA MUKILAN</h1>
+                <div class="sec1-weds-script">Weds</div>
+                <h2 class="sec1-bride-title">SWETHA</h2>
+              </div>
+
+              <div class="sec1-lotus-divider">
+                <span class="sec1-divider-line"></span>
+                <svg class="lotus-svg-icon" viewBox="0 0 24 24">
+                  <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
+                </svg>
+                <span class="sec1-divider-line"></span>
+              </div>
+
+              <div class="sec1-tagline-bottom">
+                <span>A NEW CHAPTER</span>
+                <span>BEGINS</span>
+              </div>
+            </div>
+
+            <!-- Scroll Cue -->
+            <div class="scroll-cue" onclick="scrollToSection(1)">
+              <span class="cue-text">Scroll or Swipe to Enter</span>
+              <div class="cue-arrow">
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 2: CONTINUOUS RUNNING VIDEO (NO PASSPORT/POSTER) ================= -->
+      <section class="story-page video-page" id="section-2" data-index="1">
+        <div class="mobile-canvas-stage">
+          <div class="mobile-card card-ratio-video">
+            <div class="video-card-container">
+              <video 
+                id="ordered-invitation-video" 
+                class="continuous-running-video" 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                preload="auto">
+                <source src="ordered_video.mp4" type="video/mp4">
+                <source src="Video%20Project%203_20260930145807.mp4" type="video/mp4">
+              </video>
+
+              <!-- Discreet Sound Toggle Pill -->
+              <button class="video-sound-pill" id="btn-ordered-mute" title="Toggle Sound">
+                <i class="fa-solid fa-volume-xmark" id="icon-ordered-mute"></i>
+                <span id="text-ordered-mute">Muted</span>
+              </button>
+
+              <!-- Bottom Cue to Page 3 -->
+              <div class="video-next-cue" onclick="scrollToSection(2)">
+                <span>Our Story</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 3: OUR STORY (Matching Sample Image 3) ================= -->
+      <section class="story-page" id="section-3" data-index="2">
+        <div class="mobile-canvas-stage">
+          <div class="mobile-card card-ratio-story" style="background-image: url('template_story_blank.jpg');">
+            
+            <div class="sec3-story-box">
+              <h2 class="sec3-story-script">Our Story</h2>
+              <div class="sec3-story-subheading">Our Story</div>
+              <div class="sec3-story-prose">
+                <p class="story-para">Some stories begin unexpectedly, but the most beautiful ones begin with a simple hello.</p>
+                <p class="story-para">Rajha Mukilan and Swetha's journey began during their golden days, where friendship slowly blossomed into something more.</p>
+                <p class="story-para">Through countless moments, conversations, laughter, and memories, their bond grew stronger with every passing day.</p>
+                <p class="story-para">What started as a beautiful connection became a love they chose to cherish forever.</p>
+                <p class="story-para story-para-conclusion">And now, they begin their next chapter — together, for a lifetime. 💍 ✨</p>
+              </div>
+            </div>
+
+            <!-- Bottom Cue -->
+            <div class="scroll-cue" onclick="scrollToSection(3)">
+              <span class="cue-text">Reception Details</span>
+              <div class="cue-arrow">
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PAGE 4: RECEPTION (Matching Sample Image 2) ================= -->
+      <section class="story-page reception-page" id="section-4" data-index="3">
+        <div class="mobile-canvas-stage">
+          <div class="mobile-card card-ratio-reception" style="background-image: url('template_reception_blank.jpg');">
+            
+            <div class="sec4-inline-details-box">
+              <div class="sec4-inline-row">
+                <!-- Date -->
+                <div class="sec4-col sec4-date-col">
+                  <div class="sec4-icon-glyph">
+                    <i class="fa-regular fa-calendar"></i>
+                  </div>
+                  <div class="sec4-text-val">12 NOV 2026</div>
+                </div>
+
+                <!-- Divider -->
+                <div class="sec4-inline-divider"></div>
+
+                <!-- Venue -->
+                <div class="sec4-col sec4-venue-col">
+                  <div class="sec4-icon-glyph">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div class="sec4-text-val sec4-venue-lines">
+                    <span>BHARATHI MAHAL,</span>
+                    <span>KAMARAJ NAGAR,</span>
+                    <span>GOBICHETTIPALAYAM</span>
+                  </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="sec4-inline-divider"></div>
+
+                <!-- Time -->
+                <div class="sec4-col sec4-time-col">
+                  <div class="sec4-icon-glyph">
+                    <i class="fa-regular fa-clock"></i>
+                  </div>
+                  <div class="sec4-text-val">6:00 PM – 10:00 PM</div>
+                </div>
+              </div>
+
+              <!-- Lotus Flourish Line -->
+              <div class="sec4-lotus-row">
+                <span class="sec4-lotus-line"></span>
+                <svg class="lotus-svg-icon" viewBox="0 0 24 24">
+                  <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
+                </svg>
+                <span class="sec4-lotus-line"></span>
+              </div>
+            </div>
+
+            <!-- Back to Top Cue -->
+            <div class="scroll-cue" onclick="scrollToSection(0)">
+              <span class="cue-text">Back to Top</span>
+              <div class="cue-arrow">
+                <i class="fa-solid fa-chevron-up"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification Message -->
+  <div class="toast-notification" id="toast-notification"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
