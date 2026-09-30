@@ -19,7 +19,7 @@ export default function StorySection({ onScrollNext }) {
             decoding="async"
           />
 
-          {/* Exactly allocated story box - text appears only ONCE and fits parchment */}
+          {/* Exactly allocated story box - text appears only ONCE and fits parchment perfectly */}
           <div className="sec3-story-box">
             {/* Gold Script Calligraphy Heading (appears ONLY ONCE) */}
             <h2 className="sec3-story-script">Our Story</h2>
@@ -33,18 +33,30 @@ export default function StorySection({ onScrollNext }) {
               <span className="sec3-divider-line"></span>
             </div>
 
-            {/* Elegant Book Italic Prose tailored to fit parchment space */}
+            {/* User's Exact Story Content tailored to fit parchment safe zone */}
             <div className="sec3-story-prose">
               <p className="story-para">
                 Some stories begin unexpectedly, but the most beautiful ones begin with a simple hello.
               </p>
               
               <p className="story-para">
-                Rajha Mukilan & Swetha's journey blossomed through shared laughter, cherished conversations, and memories that grew into a love to cherish forever.
+                Our journey began with friendship, where two hearts slowly found their way to each other.
+              </p>
+              
+              <p className="story-para">
+                Through countless moments, conversations, laughter, and memories, our bond grew stronger with every passing day.
+              </p>
+              
+              <p className="story-para">
+                What started as a beautiful friendship blossomed into a love we chose to cherish forever.
+              </p>
+
+              <p className="story-para">
+                From friends to soulmates, from soulmates to lovers, and now to husband and wife, our journey has been nothing short of magical.
               </p>
               
               <p className="story-para story-para-conclusion">
-                And now, they begin their next chapter — together, for a lifetime. 💍 ✨
+                And now, we begin our next chapter — together, for a lifetime. 💍✨
               </p>
             </div>
           </div>
