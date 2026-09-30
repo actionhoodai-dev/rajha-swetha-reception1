@@ -1,13 +1,24 @@
 'use client';
 
+const STORY_BLUR_BASE64 = "data:image/webp;base64,UklGRuYAAABXRUJQVlA4INoAAABwBQCdASoXACAAPzmQvVgvKaYjqAqp4CcJYgC1CKocAAftJFQCBnbCL0YBsw5OJSN3bAHAAMyLn20mEpl+8p5mRHthGDFLhXGEojm8l5kTBsMJgnOydk0t8Hk7At1kImlgy6/MxP1NhhLMgivyBGHStDfsDaXyNjunOXrDbbN9rBCFtiEmlhJ4OD5fScOzENDLdxkypOl0SLQt6MHy9V8gS1L4YW/pFUCSmsJ0fruWZfyrB/RndatAeZny/P22Zv4lNmsoT9vzb6DGFzk7sHaYAQStAZWmqLgAAA==";
+
 export default function StorySection({ onScrollNext }) {
   return (
     <section className="story-page" id="section-3" data-index="2">
       <div className="mobile-canvas-stage">
         <div 
           className="mobile-card card-ratio-story"
-          style={{ backgroundImage: `url('/template_story_blank.jpg')` }}
+          style={{ backgroundImage: `url('${STORY_BLUR_BASE64}')` }}
         >
+          {/* Instant High-Priority Background Image */}
+          <img
+            src="/template_story_blank.webp"
+            alt="Our Story Background"
+            className="mobile-card-bg-img"
+            loading="lazy"
+            decoding="async"
+          />
+
           {/* Exactly allocated story box - text appears only ONCE and fits parchment */}
           <div className="sec3-story-box">
             {/* Gold Script Calligraphy Heading (appears ONLY ONCE) */}

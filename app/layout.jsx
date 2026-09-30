@@ -21,6 +21,33 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* High-Priority Image Preloads for Instant First Paint */}
+        <link
+          rel="preload"
+          as="image"
+          href="/template_intro_blank.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/template_story_blank.webp"
+          type="image/webp"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/template_reception_blank.webp"
+          type="image/webp"
+        />
+        <link
+          rel="preload"
+          as="video"
+          href="/ordered_video.mp4"
+          type="video/mp4"
+        />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

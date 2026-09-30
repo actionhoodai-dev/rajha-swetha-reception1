@@ -328,11 +328,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.rotate((this.rotation * Math.PI) / 180);
       ctx.scale(Math.cos(this.flip), 1);
 
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.bezierCurveTo(this.size / 2, -this.size / 2, this.size, 0, 0, this.size);
-      ctx.bezierCurveTo(-this.size, 0, -this.size / 2, -this.size / 2, 0, 0);
       ctx.fillStyle = this.color;
+      ctx.beginPath();
+      const s = this.size;
+      const topCurveHeight = s * 0.3;
+      ctx.moveTo(0, topCurveHeight);
+      ctx.bezierCurveTo(-s * 0.55, -s * 0.55, -s * 1.05, s * 0.35, 0, s);
+      ctx.bezierCurveTo(s * 1.05, s * 0.35, s * 0.55, -s * 0.55, 0, topCurveHeight);
+      ctx.closePath();
       ctx.fill();
       ctx.restore();
     }
@@ -344,24 +347,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animatePetals() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (petalsEnabled) {
-      petals.forEach(p => {
-        p.update();
+    // Mandatory petals on pages 1, 3, 4; seamlessly hidden on page 2 (video)
+    const isVisibleOnSection = currentSectionIndex !== 1;
+    petals.forEach(p => {
+      p.update();
+      if (isVisibleOnSection) {
         p.draw();
-      });
-    }
+      }
+    });
     requestAnimationFrame(animatePetals);
   }
 
   animatePetals();
-
-  if (btnPetalsToggle) {
-    btnPetalsToggle.addEventListener('click', () => {
-      petalsEnabled = !petalsEnabled;
-      btnPetalsToggle.classList.toggle('active', petalsEnabled);
-      showToast(petalsEnabled ? 'Falling petals enabled 🌸' : 'Falling petals paused');
-    });
-  }
 
 
   // ================= 6. TOAST NOTIFICATION HELPER =================

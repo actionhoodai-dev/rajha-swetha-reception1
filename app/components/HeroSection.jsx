@@ -1,13 +1,24 @@
 'use client';
 
+const INTRO_BLUR_BASE64 = "data:image/webp;base64,UklGRtQAAABXRUJQVlA4IMgAAADwBACdASoWACAAPzmQvVevKaYjqAqp4CcJZgC1CAeEntypm5YBeIlrg4JyinT1GAgAy0LJkjxvdawNXfG6z3PAQIsMEpn6Wk9BfnAUeb3ycAnHatPeaoUYP4RtjWVnvbT752x3Ia1Gd5x8Qt71bPLfUD0nclnXuZ22hMI6iEgR8L/OeEVyb8ps/pWWGdrx75TLSTzEIVUti0kb29dXm/UVNMUa6PRDH4SQZQcdipvpS2wUqyO8t9qzK6Ep6svA6xxAJgJrMW8AAA==";
+
 export default function HeroSection({ onScrollNext }) {
   return (
     <section className="story-page" id="section-1" data-index="0">
       <div className="mobile-canvas-stage">
         <div 
           className="mobile-card card-ratio-intro"
-          style={{ backgroundImage: `url('/template_intro_blank.jpg')` }}
+          style={{ backgroundImage: `url('${INTRO_BLUR_BASE64}')` }}
         >
+          {/* Instant High-Priority Background Image */}
+          <img
+            src="/template_intro_blank.webp"
+            alt="Rajha Mukilan & Swetha Wedding"
+            className="mobile-card-bg-img"
+            fetchPriority="high"
+            decoding="async"
+          />
+
           {/* Typography matching Sample Image 1 */}
           <div className="sec1-typography-container">
             <div className="sec1-tagline-top">

@@ -12,7 +12,6 @@ import FloatingHeader from './components/FloatingHeader';
 
 export default function WeddingPage() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPetalsEnabled, setIsPetalsEnabled] = useState(true);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
@@ -138,8 +137,8 @@ export default function WeddingPage() {
       {/* Ambient Blurred Background matching active section */}
       <AmbientBackdrop activeIndex={activeIndex} />
 
-      {/* Falling Petals Particle Canvas */}
-      <PetalsCanvas isEnabled={isPetalsEnabled} />
+      {/* Mandatory Heart-Shaped Petals (Hidden on Section 2 Video, active on 1, 3, 4) */}
+      <PetalsCanvas isVisible={activeIndex !== 1} />
 
       {/* Top Reading Progress Bar */}
       <div className="top-progress-container">
@@ -149,13 +148,8 @@ export default function WeddingPage() {
         />
       </div>
 
-      {/* Floating Header Controls */}
+      {/* Floating Header Controls (Music & Couple Badge only) */}
       <FloatingHeader
-        isPetalsEnabled={isPetalsEnabled}
-        onTogglePetals={() => {
-          setIsPetalsEnabled(!isPetalsEnabled);
-          triggerToast(!isPetalsEnabled ? 'Petals Enabled 🌸' : 'Petals Disabled');
-        }}
         isMusicPlaying={isMusicPlaying}
         onToggleMusic={toggleMusic}
       />
@@ -172,7 +166,7 @@ export default function WeddingPage() {
           {/* Page 1: Hero / Welcome */}
           <HeroSection onScrollNext={scrollToSection} />
 
-          {/* Page 2: Continuous Running AI Video */}
+          {/* Page 2: Continuous Running AI Video (No Petals Over Video) */}
           <VideoSection 
             onScrollNext={scrollToSection}
             showToast={triggerToast}

@@ -10,6 +10,12 @@
   <meta property="og:description" content="Two beautiful souls, one incredible journey. Save the date: 12 November 2026 at Bharathi Mahal, Gobichettipalayam.">
   <meta property="og:type" content="website">
 
+  <!-- High-Priority Image Preloads for Instant First Paint -->
+  <link rel="preload" as="image" href="template_intro_blank.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="template_story_blank.webp" type="image/webp">
+  <link rel="preload" as="image" href="template_reception_blank.webp" type="image/webp">
+  <link rel="preload" as="video" href="ordered_video.mp4" type="video/mp4">
+
   <!-- Google Fonts for Identical Typography matching sample images -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +30,7 @@
   <!-- Ambient Blurred Background (provides cinematic glow) -->
   <div class="ambient-backdrop" id="ambient-backdrop"></div>
 
-  <!-- Petals Particle Canvas -->
+  <!-- Mandatory Heart-Shaped Petals Particle Canvas -->
   <canvas id="petals-canvas"></canvas>
 
   <!-- Top Progress Bar -->
@@ -42,11 +48,6 @@
     </div>
 
     <div class="header-right">
-      <button class="header-btn" id="btn-petals-toggle" title="Toggle Falling Petals">
-        <i class="fa-solid fa-fan"></i>
-        <span class="btn-text">Petals</span>
-      </button>
-      
       <button class="header-btn audio-btn" id="btn-music-toggle" title="Toggle Romantic Ambience Music">
         <div class="sound-wave-icon" id="sound-wave">
           <span></span><span></span><span></span><span></span>
@@ -77,11 +78,13 @@
   <main class="story-wrapper" id="story-wrapper">
     <div class="story-viewport" id="story-viewport">
 
-      <!-- ================= PAGE 1: HERO / COVER (Matching Sample Image 1) ================= -->
+      <!-- ================= PAGE 1: HERO / COVER ================= -->
       <section class="story-page" id="section-1" data-index="0">
         <div class="mobile-canvas-stage">
-          <div class="mobile-card card-ratio-intro" style="background-image: url('template_intro_blank.jpg');">
+          <div class="mobile-card card-ratio-intro" style="background-image: url('data:image/webp;base64,UklGRtQAAABXRUJQVlA4IMgAAADwBACdASoWACAAPzmQvVevKaYjqAqp4CcJZgC1CAeEntypm5YBeIlrg4JyinT1GAgAy0LJkjxvdawNXfG6z3PAQIsMEpn6Wk9BfnAUeb3ycAnHatPeaoUYP4RtjWVnvbT752x3Ia1Gd5x8Qt71bPLfUD0nclnXuZ22hMI6iEgR8L/OeEVyb8ps/pWWGdrx75TLSTzEIVUti0kb29dXm/UVNMUa6PRDH4SQZQcdipvpS2wUqyO8t9qzK6Ep6svA6xxAJgJrMW8AAA==');">
             
+            <img src="template_intro_blank.webp" alt="Rajha Mukilan & Swetha Wedding" class="mobile-card-bg-img" fetchpriority="high" decoding="async">
+
             <div class="sec1-typography-container">
               <div class="sec1-tagline-top">
                 <span>TWO</span>
@@ -130,7 +133,7 @@
         </div>
       </section>
 
-      <!-- ================= PAGE 2: CONTINUOUS RUNNING VIDEO (NO PASSPORT/POSTER) ================= -->
+      <!-- ================= PAGE 2: CONTINUOUS RUNNING VIDEO ================= -->
       <section class="story-page video-page" id="section-2" data-index="1">
         <div class="mobile-canvas-stage">
           <div class="mobile-card card-ratio-video">
@@ -163,11 +166,13 @@
         </div>
       </section>
 
-      <!-- ================= PAGE 3: OUR STORY (Matching Sample Image 3) ================= -->
+      <!-- ================= PAGE 3: OUR STORY ================= -->
       <section class="story-page" id="section-3" data-index="2">
         <div class="mobile-canvas-stage">
-          <div class="mobile-card card-ratio-story" style="background-image: url('template_story_blank.jpg');">
+          <div class="mobile-card card-ratio-story" style="background-image: url('data:image/webp;base64,UklGRuYAAABXRUJQVlA4INoAAABwBQCdASoXACAAPzmQvVgvKaYjqAqp4CcJYgC1CKocAAftJFQCBnbCL0YBsw5OJSN3bAHAAMyLn20mEpl+8p5mRHthGDFLhXGEojm8l5kTBsMJgnOydk0t8Hk7At1kImlgy6/MxP1NhhLMgivyBGHStDfsDaXyNjunOXrDbbN9rBCFtiEmlhJ4OD5fScOzENDLdxkypOl0SLQt6MHy9V8gS1L4YW/pFUCSmsJ0fruWZfyrB/RndatAeZny/P22Zv4lNmsoT9vzb6DGFzk7sHaYAQStAZWmqLgAAA==');">
             
+            <img src="template_story_blank.webp" alt="Our Story Background" class="mobile-card-bg-img" loading="lazy" decoding="async">
+
             <div class="sec3-story-box">
               <h2 class="sec3-story-script">Our Story</h2>
               <div class="sec3-lotus-divider">
@@ -196,11 +201,13 @@
         </div>
       </section>
 
-      <!-- ================= PAGE 4: RECEPTION (Matching Sample Image 2) ================= -->
+      <!-- ================= PAGE 4: RECEPTION ================= -->
       <section class="story-page reception-page" id="section-4" data-index="3">
         <div class="mobile-canvas-stage">
-          <div class="mobile-card card-ratio-reception" style="background-image: url('template_reception_blank.jpg');">
+          <div class="mobile-card card-ratio-reception" style="background-image: url('data:image/webp;base64,UklGRroAAABXRUJQVlA4IK4AAADwBACdASoVACAAPzmQv1evKaajqAqp4CcJZgC7ADQ6WDs3vS3F8OnFu4fTiSVY1AAA/r5H96O7SzZ2g8uzVCDUQMWUnOoZNUE2iDfSwZZKBFZQdv//sWfcDzdeLiiB1G84WhRCkjhmqYMGXPFK3kEp2yH7esTmaWR4+0iDB6oJeVZI9NOhhm/tHN4C/5t4E7IKafwwXoSPp0JWdR9fhIhQYwTh2QinyCgyO4fgAAA==');">
             
+            <img src="template_reception_blank.webp" alt="Reception Details Background" class="mobile-card-bg-img" loading="lazy" decoding="async">
+
             <div class="sec4-inline-details-box">
               <div class="sec4-inline-row">
                 <!-- Date -->

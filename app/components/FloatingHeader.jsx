@@ -1,8 +1,6 @@
 'use client';
 
 export default function FloatingHeader({
-  isPetalsEnabled,
-  onTogglePetals,
   isMusicPlaying,
   onToggleMusic,
 }) {
@@ -16,15 +14,6 @@ export default function FloatingHeader({
       </div>
 
       <div className="header-right">
-        <button
-          className="header-btn"
-          onClick={onTogglePetals}
-          title="Toggle Falling Wedding Petals"
-        >
-          <i className="fa-solid fa-fan"></i>
-          <span className="btn-text">{isPetalsEnabled ? 'Petals On' : 'Petals Off'}</span>
-        </button>
-
         <button
           className={`header-btn audio-btn ${isMusicPlaying ? 'playing' : ''}`}
           onClick={onToggleMusic}
