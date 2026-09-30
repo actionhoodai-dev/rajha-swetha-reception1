@@ -16,7 +16,7 @@ export default function VideoSection({ onScrollNext, showToast }) {
       video.play().catch(() => {
         // Retry on first touch/interaction if browser was pending
         const handleUserGesture = () => {
-          video.play().catch(() => {});
+          if (video) video.play().catch(() => {});
           window.removeEventListener('touchstart', handleUserGesture);
           window.removeEventListener('click', handleUserGesture);
         };
@@ -54,8 +54,8 @@ export default function VideoSection({ onScrollNext, showToast }) {
               playsInline
               preload="auto"
             >
+              <source src="/3rd-page-video.mp4" type="video/mp4" />
               <source src="/ordered_video.mp4" type="video/mp4" />
-              <source src="/Video%20Project%203_20260930145807.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -69,7 +69,7 @@ export default function VideoSection({ onScrollNext, showToast }) {
               <span>{isMuted ? 'Muted' : 'Sound On'}</span>
             </button>
 
-            {/* Seamless Bottom Cue to Page 3 */}
+            {/* Seamless Bottom Cue to Page 4 (Our Story) */}
             <div className="video-next-cue" onClick={() => onScrollNext(2)}>
               <span>Our Story</span>
               <i className="fa-solid fa-chevron-down"></i>

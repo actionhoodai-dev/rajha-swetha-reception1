@@ -323,8 +323,8 @@ html, body {
 }
 
 .card-ratio-video {
-  aspect-ratio: 720 / 1280;
-  max-width: calc(100dvh * (720 / 1280));
+  aspect-ratio: 1366 / 1910;
+  max-width: calc(100dvh * (1366 / 1910));
   background: #000;
   overflow: hidden;
 }
