@@ -7,12 +7,15 @@ export const viewport = {
   userScalable: false,
 };
 
-// Automatically use VERCEL_URL if deployed on Vercel, or custom domain fallback
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ? process.env.NEXT_PUBLIC_SITE_URL
-  : process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'https://rajha-swetha-reception1.vercel.app';
+// Automatically detect Vercel production domain, deployment URL, or custom domain
+const getSiteUrl = () => {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'https://rajha-swetha-reception1.vercel.app';
+};
+
+const siteUrl = getSiteUrl();
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,7 +25,8 @@ export const metadata = {
     title: 'Rajha Mukilan & Swetha | Wedding & Reception',
     description: 'Two beautiful souls, one incredible journey. Save the date: 12 November 2026 at Bharathi Mahal, Gobichettipalayam.',
     type: 'website',
-    url: '/',
+    url: siteUrl,
+    siteName: 'Rajha & Swetha Wedding',
     images: [
       {
         url: '/og-image.jpg',
@@ -45,15 +49,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Open Graph Meta Tags specifically for WhatsApp, iMessage, and Social Previews */}
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta property="og:image:secure_url" content="/og-image.jpg" />
-        <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="675" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="/og-image.jpg" />
-
         {/* High-Priority Preloads for Instant First Paint */}
         <link
           rel="preload"
