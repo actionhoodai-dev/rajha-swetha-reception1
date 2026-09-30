@@ -8,30 +8,28 @@ export default function StorySection({ onScrollNext }) {
           className="mobile-card card-ratio-story"
           style={{ backgroundImage: `url('/template_story_blank.jpg')` }}
         >
-          {/* Typography matching Sample Image 3 */}
+          {/* Exactly allocated story box - text appears only ONCE and fits parchment */}
           <div className="sec3-story-box">
-            {/* Gold Script Calligraphy Heading */}
+            {/* Gold Script Calligraphy Heading (appears ONLY ONCE) */}
             <h2 className="sec3-story-script">Our Story</h2>
 
-            {/* Elegant Italic Subheading */}
-            <div className="sec3-story-subheading">Our Story</div>
+            {/* Subtle decorative divider */}
+            <div className="sec3-lotus-divider">
+              <span className="sec3-divider-line"></span>
+              <svg className="lotus-svg-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 3.5 6.5 7 1-3.5 3.5-6 6.5-7-3-1-5.5-4-6-7z" fill="currentColor"/>
+              </svg>
+              <span className="sec3-divider-line"></span>
+            </div>
 
-            {/* Poetic Italic Book Prose */}
+            {/* Elegant Book Italic Prose tailored to fit parchment space */}
             <div className="sec3-story-prose">
               <p className="story-para">
                 Some stories begin unexpectedly, but the most beautiful ones begin with a simple hello.
               </p>
               
               <p className="story-para">
-                Rajha Mukilan and Swetha's journey began during their golden days, where friendship slowly blossomed into something more.
-              </p>
-              
-              <p className="story-para">
-                Through countless moments, conversations, laughter, and memories, their bond grew stronger with every passing day.
-              </p>
-              
-              <p className="story-para">
-                What started as a beautiful connection became a love they chose to cherish forever.
+                Rajha Mukilan & Swetha's journey blossomed through shared laughter, cherished conversations, and memories that grew into a love to cherish forever.
               </p>
               
               <p className="story-para story-para-conclusion">

@@ -553,9 +553,11 @@ html, body {
 /* ================= PAGE 3: OUR STORY ================= */
 .sec3-story-box {
   position: absolute;
-  top: 14.5%;
-  left: 10%;
-  right: 10%;
+  top: 17%;
+  left: 18%;
+  right: 18%;
+  max-width: 290px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -564,38 +566,43 @@ html, body {
   z-index: 10;
 }
 
+/* Gold Script Calligraphy Heading (Appears only ONCE) */
 .sec3-story-script {
   font-family: 'Great Vibes', 'Alex Brush', cursive;
-  font-size: clamp(2.6rem, 9.5vw, 3.6rem);
+  font-size: clamp(2.3rem, 7.5vw, 3.1rem);
   color: #C8973E;
-  line-height: 1;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+  line-height: 1.05;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.75);
   margin-bottom: 2px;
 }
 
-.sec3-story-subheading {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-size: clamp(0.68rem, 2.3vw, 0.82rem);
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  color: #4E3929;
-  margin-bottom: clamp(6px, 1.8vh, 12px);
+.sec3-lotus-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 50%;
+  margin: 3px auto 10px auto;
+}
+
+.sec3-divider-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, transparent, rgba(160, 115, 60, 0.45), transparent);
 }
 
 .sec3-story-prose {
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1.5vh, 10px);
+  gap: clamp(6px, 1.4vh, 10px);
   width: 100%;
-  max-width: 310px;
 }
 
 .story-para {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-size: clamp(0.78rem, 2.7vw, 0.92rem);
-  line-height: 1.52;
+  font-size: clamp(0.74rem, 2.4vw, 0.86rem);
+  line-height: 1.48;
   color: #342315;
   font-weight: 600;
   text-align: center;
@@ -603,7 +610,7 @@ html, body {
 }
 
 .story-para-conclusion {
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 /* ================= PAGE 4: RECEPTION INLINE ================= */
