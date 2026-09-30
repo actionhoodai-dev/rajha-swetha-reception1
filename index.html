@@ -11,6 +11,7 @@
   <meta property="og:type" content="website">
 
   <!-- High-Priority Image Preloads for Instant First Paint -->
+  <link rel="preload" as="video" href="reception-intro.mp4" type="video/mp4">
   <link rel="preload" as="image" href="template_intro_blank.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" as="image" href="template_story_blank.webp" type="image/webp">
   <link rel="preload" as="image" href="template_reception_blank.webp" type="image/webp">
@@ -27,6 +28,28 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Website Intro Video Overlay with Skip Intro Button at Left Bottom -->
+  <div class="intro-overlay" id="intro-overlay">
+    <div class="intro-backdrop-blur"></div>
+    <div class="intro-video-container">
+      <video id="intro-video" class="intro-video" autoplay playsinline muted preload="auto">
+        <source src="reception-intro.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    <!-- Skip Intro Button Positioned at Bottom-Left -->
+    <button class="skip-intro-btn" id="btn-skip-intro" aria-label="Skip Intro">
+      <i class="fa-solid fa-forward-step"></i>
+      <span>Skip Intro</span>
+    </button>
+
+    <!-- Subtle Scroll Hint -->
+    <div class="intro-scroll-hint" id="intro-scroll-hint">
+      <span>Scroll to Enter</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
 
   <!-- Ambient Blurred Background (provides cinematic glow) -->
   <div class="ambient-backdrop" id="ambient-backdrop"></div>

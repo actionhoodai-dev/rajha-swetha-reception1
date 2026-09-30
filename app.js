@@ -188,7 +188,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // ================= 4. RECEPTION SONG AUDIO PLAYER =================
+  // ================= 4. INTRO VIDEO OVERLAY & SKIP INTRO =================
+  const introOverlay = document.getElementById('intro-overlay');
+  const introVideo = document.getElementById('intro-video');
+  const btnSkipIntro = document.getElementById('btn-skip-intro');
+  const introScrollHint = document.getElementById('intro-scroll-hint');
+
+  let isIntroDismissed = false;
+
+  function dismissIntro() {
+    if (isIntroDismissed) return;
+    isIntroDismissed = true;
+
+    if (introOverlay) {
+      introOverlay.classList.add('dismissed');
+      setTimeout(() => {
+        introOverlay.style.display = 'none';
+        if (introVideo) introVideo.pause();
+      }, 850);
+    }
+
+    // Play reception music upon entering
+    playSong();
+  }
+
+  if (introVideo) {
+    introVideo.play().catch(() => {
+      const startIntroVideo = () => {
+        if (introVideo) introVideo.play().catch(() => {});
+        window.removeEventListener('touchstart', startIntroVideo);
+        window.removeEventListener('click', startIntroVideo);
+      };
+      window.addEventListener('touchstart', startIntroVideo, { once: true });
+      window.addEventListener('click', startIntroVideo, { once: true });
+    });
+
+    introVideo.addEventListener('ended', dismissIntro);
+  }
+
+  if (btnSkipIntro) {
+    btnSkipIntro.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissIntro();
+    });
+  }
+
+  if (introScrollHint) {
+    introScrollHint.addEventListener('click', dismissIntro);
+  }
+
+  // Dismiss intro on button click or when video finishes naturally
+
+
+
+  // ================= 5. RECEPTION SONG AUDIO PLAYER =================
   const receptionAudio = document.getElementById('reception-audio');
   const btnBottomAudio = document.getElementById('btn-bottom-audio');
   const bottomSoundWave = document.getElementById('bottom-sound-wave');
@@ -196,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bottomAudioLabel = document.getElementById('bottom-audio-label');
 
   let isSongPlaying = false;
+  let userManuallyMuted = false;
 
   function updateAudioUI(playing) {
     isSongPlaying = playing;
@@ -209,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function playSong() {
-    if (!receptionAudio) return;
+    if (!receptionAudio || userManuallyMuted) return;
     receptionAudio.play().then(() => {
       updateAudioUI(true);
     }).catch(() => {
@@ -223,27 +277,38 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAudioUI(false);
   }
 
-  // Auto-play on mount or on first user scroll / touch / click
+  // Global Interaction Listeners: Start song when user clicks or scrolls ANY part of screen
   if (receptionAudio) {
     receptionAudio.volume = 0.75;
     playSong();
 
-    const handleFirstUserInteraction = () => {
-      if (receptionAudio && receptionAudio.paused) {
-        receptionAudio.play().then(() => updateAudioUI(true)).catch(() => {});
+    const handleAnyUserInteraction = () => {
+      if (!userManuallyMuted && receptionAudio.paused) {
+        playSong();
       }
-      window.removeEventListener('scroll', handleFirstUserInteraction);
-      window.removeEventListener('wheel', handleFirstUserInteraction);
-      window.removeEventListener('touchstart', handleFirstUserInteraction);
-      window.removeEventListener('pointerdown', handleFirstUserInteraction);
-      window.removeEventListener('click', handleFirstUserInteraction);
     };
 
-    window.addEventListener('scroll', handleFirstUserInteraction, { passive: true });
-    window.addEventListener('wheel', handleFirstUserInteraction, { passive: true });
-    window.addEventListener('touchstart', handleFirstUserInteraction, { passive: true });
-    window.addEventListener('pointerdown', handleFirstUserInteraction, { passive: true });
-    window.addEventListener('click', handleFirstUserInteraction, { passive: true });
+    const interactionEvents = [
+      'click',
+      'pointerdown',
+      'mousedown',
+      'touchstart',
+      'touchend',
+      'wheel',
+      'scroll',
+      'keydown'
+    ];
+
+    interactionEvents.forEach(evt => {
+      window.addEventListener(evt, handleAnyUserInteraction, { capture: true, passive: true });
+      document.addEventListener(evt, handleAnyUserInteraction, { capture: true, passive: true });
+    });
+
+    if (storyViewport) {
+      storyViewport.addEventListener('scroll', handleAnyUserInteraction, { capture: true, passive: true });
+      storyViewport.addEventListener('wheel', handleAnyUserInteraction, { capture: true, passive: true });
+      storyViewport.addEventListener('touchmove', handleAnyUserInteraction, { capture: true, passive: true });
+    }
   }
 
   if (btnBottomAudio) {
@@ -251,9 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       if (!receptionAudio) return;
       if (receptionAudio.paused) {
+        userManuallyMuted = false;
         playSong();
         showToast('Playing Song 🎵');
       } else {
+        userManuallyMuted = true;
         pauseSong();
         showToast('Song Muted 🔇');
       }

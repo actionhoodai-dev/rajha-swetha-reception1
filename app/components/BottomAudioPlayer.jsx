@@ -5,53 +5,102 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 export default function BottomAudioPlayer({ showToast }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const userManuallyMutedRef = useRef(false);
+  const isPlayingRef = useRef(false);
 
-  // Auto-play on mount or on first user scroll / touch / click
+  // Keep ref in sync
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
+
+  const startMusic = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio || userManuallyMutedRef.current) return;
+
+    if (audio.paused) {
+      audio.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        // Autoplay policy prevented playback, waiting for next user gesture
+      });
+    }
+  }, []);
+
+  // Set up audio and global interaction triggers for ANY click or scroll
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     audio.volume = 0.75;
 
-    const tryAutoPlay = () => {
-      audio.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {
-        // Autoplay policy prevented unmuted autoplay; wait for first user gesture
-        const handleFirstInteraction = () => {
-          if (!audio) return;
-          audio.play().then(() => {
-            setIsPlaying(true);
-          }).catch(() => {});
+    // 1. Try playing immediately upon page mount
+    startMusic();
 
-          window.removeEventListener('scroll', handleFirstInteraction);
-          window.removeEventListener('wheel', handleFirstInteraction);
-          window.removeEventListener('touchstart', handleFirstInteraction);
-          window.removeEventListener('pointerdown', handleFirstInteraction);
-          window.removeEventListener('click', handleFirstInteraction);
-        };
-
-        window.addEventListener('scroll', handleFirstInteraction, { passive: true });
-        window.addEventListener('wheel', handleFirstInteraction, { passive: true });
-        window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
-        window.addEventListener('pointerdown', handleFirstInteraction, { passive: true });
-        window.addEventListener('click', handleFirstInteraction, { passive: true });
-      });
+    // 2. Global event listener on ANY user interaction anywhere on screen
+    const handleGlobalInteraction = () => {
+      if (!userManuallyMutedRef.current && audioRef.current && audioRef.current.paused) {
+        startMusic();
+      }
     };
 
-    tryAutoPlay();
-  }, []);
+    const interactionEvents = [
+      'click',
+      'pointerdown',
+      'mousedown',
+      'touchstart',
+      'touchend',
+      'wheel',
+      'scroll',
+      'keydown'
+    ];
 
-  const toggleAudio = useCallback(() => {
+    interactionEvents.forEach((evt) => {
+      window.addEventListener(evt, handleGlobalInteraction, { capture: true, passive: true });
+      document.addEventListener(evt, handleGlobalInteraction, { capture: true, passive: true });
+    });
+
+    // Also attach directly to the scroll viewport if present
+    const viewport = document.querySelector('.story-viewport');
+    if (viewport) {
+      viewport.addEventListener('scroll', handleGlobalInteraction, { capture: true, passive: true });
+      viewport.addEventListener('wheel', handleGlobalInteraction, { capture: true, passive: true });
+      viewport.addEventListener('touchmove', handleGlobalInteraction, { capture: true, passive: true });
+    }
+
+    // Custom event triggered by IntroOverlay skip or dismiss
+    const handleCustomStart = () => {
+      userManuallyMutedRef.current = false;
+      startMusic();
+    };
+    window.addEventListener('start-reception-audio', handleCustomStart);
+
+    return () => {
+      interactionEvents.forEach((evt) => {
+        window.removeEventListener(evt, handleGlobalInteraction, { capture: true });
+        document.removeEventListener(evt, handleGlobalInteraction, { capture: true });
+      });
+      if (viewport) {
+        viewport.removeEventListener('scroll', handleGlobalInteraction, { capture: true });
+        viewport.removeEventListener('wheel', handleGlobalInteraction, { capture: true });
+        viewport.removeEventListener('touchmove', handleGlobalInteraction, { capture: true });
+      }
+      window.removeEventListener('start-reception-audio', handleCustomStart);
+    };
+  }, [startMusic]);
+
+  const toggleAudio = useCallback((e) => {
+    e.stopPropagation();
     const audio = audioRef.current;
     if (!audio) return;
 
     if (audio.paused) {
+      userManuallyMutedRef.current = false;
       audio.play().then(() => {
         setIsPlaying(true);
         if (showToast) showToast('Playing Song 🎵');
       }).catch(() => {});
     } else {
+      userManuallyMutedRef.current = true;
       audio.pause();
       setIsPlaying(false);
       if (showToast) showToast('Song Muted 🔇');
@@ -73,6 +122,7 @@ export default function BottomAudioPlayer({ showToast }) {
         onClick={toggleAudio}
         title={isPlaying ? 'Mute Music' : 'Play Music'}
         aria-label="Toggle Reception Music"
+        id="btn-bottom-audio"
       >
         <div className="bottom-sound-wave" style={{ display: isPlaying ? 'flex' : 'none' }}>
           <span></span>

@@ -10,6 +10,7 @@ import PetalsCanvas from './components/PetalsCanvas';
 import SideNav from './components/SideNav';
 import FloatingHeader from './components/FloatingHeader';
 import BottomAudioPlayer from './components/BottomAudioPlayer';
+import IntroOverlay from './components/IntroOverlay';
 
 export default function WeddingPage() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -66,6 +67,9 @@ export default function WeddingPage() {
 
   return (
     <div className="wedding-app-root">
+      {/* Intro Video Overlay with Skip Button at Left Bottom */}
+      <IntroOverlay />
+
       {/* Ambient Blurred Background matching active section */}
       <AmbientBackdrop activeIndex={activeIndex} />
 
@@ -104,7 +108,7 @@ export default function WeddingPage() {
           {/* Page 3: Our Story (5-6 words per line maximum, safe bounds) */}
           <StorySection onScrollNext={scrollToSection} />
 
-          {/* Page 4: Reception Details (moved down, no star ending, date right) */}
+          {/* Page 4: Reception Details (moved down, no star ending, date right 1cm) */}
           <ReceptionSection onScrollTop={scrollToSection} />
         </div>
       </main>
